@@ -7,17 +7,29 @@ environment:
   sdk: ">=3.2.5 <4.0.0"
 
 dependencies:
+  faker: ^2.1.0
   flutter:
     sdk: flutter
-  flutter_dotenv: ^5.1.0
+  flutter_riverpod: ^2.4.10
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
+  flutter_dotenv: ^5.1.0
 
 flutter:
   uses-material-design: true
 
   assets:
-  - .env
+    - .env
+    - assets/fonts/
+
+  fonts:
+    - family: Pixelify Sans
+      fonts:
+        - asset: assets/fonts/PixelifySans-VariableFont_wght.ttf
+    - family: PressStart2P
+      fonts:
+        - asset: assets/fonts/PressStart2P-Regular.ttf
