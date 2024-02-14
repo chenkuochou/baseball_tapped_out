@@ -1,8 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import 'package:baseball_tapped_out/model/enum/fielding_position.dart';
 import 'package:baseball_tapped_out/model/enum/personality.dart';
 import 'package:baseball_tapped_out/model/enum/player_class_enum.dart';
-import 'package:baseball_tapped_out/model/enum/fielding_position.dart';
 
 @immutable
 class Player {
@@ -136,5 +137,10 @@ class Player {
       potential: potential ?? this.potential,
       isPack: isPack ?? this.isPack,
     );
+  }
+
+  @override
+  String toString() {
+    return 'Player(number: $number, firstName: $firstName, lastName: $lastName, position: ${position.displayName}, stamina: $stamina, pitching: $pitching, batting: $batting, fielding: $fielding, running: $running, control: $control, stability: $stability, eye: $eye, personality: ${personality.toString()}, potential: $potential, isPack: $isPack)';
   }
 }

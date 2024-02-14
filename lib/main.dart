@@ -5,6 +5,8 @@
 import 'package:baseball_tapped_out/common/my_text.dart';
 import 'package:baseball_tapped_out/common/palette.dart';
 import 'package:baseball_tapped_out/game/game_page.dart';
+import 'package:baseball_tapped_out/generator/player_generator.dart';
+import 'package:baseball_tapped_out/team/team_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,6 +28,10 @@ Future<void> main() async {
 //       debugPrint(e.toString());
 //     }
 //   }
+
+  // generatePitchers().forEach((e) {
+  //   print('$e\n===\n');
+  // });
 
   runApp(
     ProviderScope(
@@ -60,7 +66,7 @@ class LayoutPage extends StatefulWidget {
 }
 
 class _LayoutPageState extends State<LayoutPage> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +79,7 @@ class _LayoutPageState extends State<LayoutPage> {
               backgroundColor: Palette.black,
               selectedIndex: _selectedIndex,
               labelType: NavigationRailLabelType.selected,
+              selectedLabelTextStyle: GoogleFonts.pressStart2p(fontSize: 8),
               groupAlignment: 0,
               onDestinationSelected: (int index) {
                 setState(() {
@@ -121,7 +128,7 @@ class _LayoutPageState extends State<LayoutPage> {
                 index: _selectedIndex,
                 children: [
                   myText('selectedIndex: $_selectedIndex'),
-                  myText('selectedIndex: $_selectedIndex'),
+                  const TeamPage(),
                   const GamePage(),
                   myText('selectedIndex: $_selectedIndex'),
                   myText('selectedIndex: $_selectedIndex'),

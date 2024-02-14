@@ -89,7 +89,7 @@ class StatsSection extends ConsumerWidget {
     }
 
     return LayoutBuilder(
-      builder: (context, constraints) => SingleChildScrollView(
+      builder: (_, constraints) => SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         physics: const ClampingScrollPhysics(),
         child: Container(

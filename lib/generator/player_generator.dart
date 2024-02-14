@@ -1,75 +1,92 @@
 import 'dart:math';
 
-import 'package:baseball_tapped_out/model/model.dart';
+import 'package:baseball_tapped_out/model/enum/fielding_position.dart';
+import 'package:baseball_tapped_out/model/enum/player_class_enum.dart';
+import 'package:baseball_tapped_out/model/player.dart';
 import 'package:faker/faker.dart';
 
 List<Player> generateHitters() {
   _fielderFielding.shuffle();
 
-  return _generatePlayers(_fielderFielding);
+  return _createPlayers(
+      true,
+      9,
+      [
+        PlayerClass.rare,
+        PlayerClass.normal,
+        PlayerClass.rare,
+        PlayerClass.epic,
+        PlayerClass.normal,
+        PlayerClass.normal,
+        PlayerClass.normal,
+        PlayerClass.dust,
+        PlayerClass.dust,
+      ],
+      _fielderFielding);
 }
 
 List<Player> generatePitchers() {
-  _pitcherFielding.shuffle();
-
-  return _generatePlayers(_pitcherFielding);
+  return _createPlayers(
+      false,
+      9,
+      [
+        PlayerClass.epic,
+        PlayerClass.rare,
+        PlayerClass.normal,
+        PlayerClass.normal,
+        PlayerClass.normal,
+        PlayerClass.normal,
+        PlayerClass.dust,
+        PlayerClass.dust,
+        PlayerClass.rare,
+      ],
+      _pitcherFielding);
 }
 
-List<Player> _generatePlayers(List positions) {
+List<Player> _createPlayers(bool isAHitter, int numberOfPlayers,
+    List<PlayerClass> playerClasses, List positions) {
+  Player createAPlayer(int index) {
+    final firstName = faker.person.firstName();
+    final lastName = faker.person.lastName();
+    final number = _getRandomInt(0, 100);
+
+    final List<int> values =
+        _getListRandom(isAHitter ? 6 : 7, playerClasses[index]);
+
+    return isAHitter
+        ? Player(
+            number: number,
+            firstName: firstName,
+            lastName: lastName,
+            position: positions[index],
+            stamina: values[0],
+            batting: values[1],
+            eye: values[2],
+            fielding: values[3],
+            running: values[4],
+            potential: values[5],
+          )
+        : Player(
+            number: number,
+            firstName: firstName,
+            lastName: lastName,
+            position: positions[index],
+            stamina: values[0],
+            pitching: values[1],
+            control: values[2],
+            stability: values[3],
+            fielding: values[4],
+            running: values[5],
+            potential: values[6],
+          );
+  }
+
   List<Player> players = [];
   for (var i = 0; i < 9; i++) {
-    players.add(_createAPlayer(false, playerClasses()[i], positions[i]));
+    players.add(createAPlayer(i));
   }
   return players;
 }
-
-Player _createAPlayer(
-    bool isAHitter, PlayerClass playerClass, FieldingPosition position) {
-  final firstName = faker.person.firstName();
-  final lastName = faker.person.lastName();
-  final number = _getRandomInt(0, 100);
-
-  final List<int> values = _getListRandom(isAHitter ? 6 : 7, playerClass);
-
-  return isAHitter
-      ? Player(
-          number: number,
-          firstName: firstName,
-          lastName: lastName,
-          position: position,
-          stamina: values[0],
-          batting: values[1],
-          eye: values[2],
-          fielding: values[3],
-          running: values[4],
-          potential: values[5],
-        )
-      : Player(
-          number: number,
-          firstName: firstName,
-          lastName: lastName,
-          position: position,
-          stamina: values[0],
-          pitching: values[1],
-          control: values[2],
-          stability: values[3],
-          fielding: values[4],
-          running: values[5],
-          potential: values[6],
-        );
-}
-
-List<PlayerClass> playerClasses() => [
-      PlayerClass.normal,
-      PlayerClass.normal,
-      PlayerClass.rare,
-      PlayerClass.epic,
-      PlayerClass.normal,
-      PlayerClass.normal,
-      PlayerClass.dust,
-      PlayerClass.dust,
-      PlayerClass.dust,
-    ];
 
 int _getRandomInt(int start, int endExclusive) {
   return Random().nextInt(endExclusive - start) + start;

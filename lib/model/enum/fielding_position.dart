@@ -13,9 +13,9 @@ enum FieldingPosition {
   dh;
 
   String get displayName => switch (this) {
-        FieldingPosition.sp => 'Starting Pitcher',
+        FieldingPosition.sp => 'SP',
         FieldingPosition.rp => 'RP',
-        FieldingPosition.cl => 'Closer',
+        FieldingPosition.cl => 'CL',
         FieldingPosition.c => 'C',
         FieldingPosition.b1 => '1B',
         FieldingPosition.b2 => '2B',
