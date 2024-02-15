@@ -1,7 +1,7 @@
-import 'package:baseball_tapped_out/game/section/control.dart';
-import 'package:baseball_tapped_out/game/section/field.dart';
-import 'package:baseball_tapped_out/game/section/lineup.dart';
-import 'package:baseball_tapped_out/game/section/stats.dart';
+import 'package:baseball_tapped_out/game/section/control_section.dart';
+import 'package:baseball_tapped_out/game/section/field_section.dart';
+import 'package:baseball_tapped_out/game/section/lineup_section.dart';
+import 'package:baseball_tapped_out/game/section/stats_section.dart';
 import 'package:flutter/material.dart';
 
 class GamePage extends StatelessWidget {

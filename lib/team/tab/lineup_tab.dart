@@ -1,3 +1,4 @@
+import 'package:baseball_tapped_out/common/palette.dart';
 import 'package:baseball_tapped_out/model/player.dart';
 import 'package:baseball_tapped_out/provider/lineup_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,34 +16,42 @@ class _LineupPageState extends ConsumerState<LineupTab> {
 
   @override
   Widget build(BuildContext context) {
-    return ReorderableListView.builder(
-      itemCount: lineup.length,
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          key: Key('$index'),
-          leading: Text(
-            (index + 1).toString(),
-            // style: MyFontStyle.bigAndBold(color: Colors.black),
-          ),
-          title: PlayerTile(player: lineup[index]),
-          trailing: ReorderableDragStartListener(
-            index: index,
-            child: const Icon(Icons.drag_handle),
-          ),
-        );
-      },
-      onReorder: (int oldIndex, int newIndex) {
-        setState(() {
-          if (oldIndex < newIndex) {
-            newIndex -= 1;
-          }
-          final Player player = lineup.removeAt(oldIndex);
-          lineup.insert(newIndex, player);
+    return Row(
+      children: [
+        Flexible(
+          flex: 1,
+          child: ReorderableListView.builder(
+            itemCount: lineup.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                key: Key('$index'),
+                leading: Text(
+                  (index + 1).toString(),
+                  // style: TextStyle(color: Palette.pureWhite),
+                ),
+                title: PlayerTile(player: lineup[index]),
+                trailing: ReorderableDragStartListener(
+                  index: index,
+                  child: const Icon(Icons.drag_handle),
+                ),
+              );
+            },
+            onReorder: (int oldIndex, int newIndex) {
+              setState(() {
+                if (oldIndex < newIndex) {
+                  newIndex -= 1;
+                }
+                final Player player = lineup.removeAt(oldIndex);
+                lineup.insert(newIndex, player);
 
-          ref.read(lineupProvider.notifier).changeState(lineup);
-        });
-      },
-      buildDefaultDragHandles: false,
+                ref.read(lineupProvider.notifier).changeState(lineup);
+              });
+            },
+            buildDefaultDragHandles: false,
+          ),
+        ),
+        const Flexible(flex: 1, child: Text('data'))
+      ],
     );
   }
 }

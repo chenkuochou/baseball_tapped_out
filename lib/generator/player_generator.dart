@@ -46,9 +46,11 @@ List<Player> generatePitchers() {
 List<Player> _createPlayers(bool isAHitter, int numberOfPlayers,
     List<PlayerClass> playerClasses, List positions) {
   Player createAPlayer(int index) {
+    final number = _getRandomInt(0, 100);
     final firstName = faker.person.firstName();
     final lastName = faker.person.lastName();
-    final number = _getRandomInt(0, 100);
+    final avatarUrl =
+        'https://api.dicebear.com/7.x/pixel-art/svg?seed=$lastName}';
 
     final List<int> values =
         _getListRandom(isAHitter ? 6 : 7, playerClasses[index]);
@@ -58,6 +60,7 @@ List<Player> _createPlayers(bool isAHitter, int numberOfPlayers,
             number: number,
             firstName: firstName,
             lastName: lastName,
+            avatarUrl: avatarUrl,
             position: positions[index],
             stamina: values[0],
             batting: values[1],
@@ -70,6 +73,7 @@ List<Player> _createPlayers(bool isAHitter, int numberOfPlayers,
             number: number,
             firstName: firstName,
             lastName: lastName,
+            avatarUrl: avatarUrl,
             position: positions[index],
             stamina: values[0],
             pitching: values[1],

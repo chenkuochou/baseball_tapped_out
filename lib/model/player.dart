@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:baseball_tapped_out/model/enum/fielding_position.dart';
@@ -10,6 +12,7 @@ class Player {
   final int number;
   final String firstName;
   final String lastName;
+  final String avatarUrl;
   final FieldingPosition position;
   final int stamina;
   final int? pitching;
@@ -27,6 +30,7 @@ class Player {
     required this.number,
     required this.firstName,
     required this.lastName,
+    required this.avatarUrl,
     required this.position,
     required this.stamina,
     this.pitching = 0,
@@ -66,6 +70,7 @@ class Player {
       'number': number,
       'firstName': firstName,
       'lastName': lastName,
+      'avatarUrl': avatarUrl,
       'position': position.displayName,
       'stamina': stamina,
       'pitching': pitching,
@@ -86,6 +91,7 @@ class Player {
       number: map['number'] as int,
       firstName: map['firstName'] as String,
       lastName: map['lastName'] as String,
+      avatarUrl: map['avatarUrl'] as String,
       position: FieldingPosition.values.byName(map['position']),
       stamina: map['stamina'] as int,
       pitching: map['pitching'] != null ? map['pitching'] as int : null,
@@ -107,6 +113,7 @@ class Player {
     int? number,
     String? firstName,
     String? lastName,
+    String? avatarUrl,
     FieldingPosition? position,
     int? stamina,
     int? pitching,
@@ -124,6 +131,7 @@ class Player {
       number: number ?? this.number,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
       position: position ?? this.position,
       stamina: stamina ?? this.stamina,
       pitching: pitching ?? this.pitching,
@@ -141,6 +149,9 @@ class Player {
 
   @override
   String toString() {
-    return 'Player(number: $number, firstName: $firstName, lastName: $lastName, position: ${position.displayName}, stamina: $stamina, pitching: $pitching, batting: $batting, fielding: $fielding, running: $running, control: $control, stability: $stability, eye: $eye, personality: ${personality.toString()}, potential: $potential, isPack: $isPack)';
+    return 'Player(number: $number, firstName: $firstName, lastName: $lastName, avatarUrl:$avatarUrl, position: ${position.displayName}, stamina: $stamina, pitching: $pitching, batting: $batting, fielding: $fielding, running: $running, control: $control, stability: $stability, eye: $eye, personality: ${personality.toString()}, potential: $potential, isPack: $isPack)';
   }
+
+  String toJson() => json.encode(toMap());
+  factory Player.fromJson(String source) => Player.fromMap(json.decode(source) as Map<String, dynamic>);
 }

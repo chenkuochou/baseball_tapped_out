@@ -5,11 +5,12 @@
 import 'package:baseball_tapped_out/common/my_text.dart';
 import 'package:baseball_tapped_out/common/palette.dart';
 import 'package:baseball_tapped_out/game/game_page.dart';
-import 'package:baseball_tapped_out/generator/player_generator.dart';
+import 'package:baseball_tapped_out/provider/app_providers.dart';
 import 'package:baseball_tapped_out/team/team_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'firebase_options.dart';
 
@@ -33,8 +34,15 @@ Future<void> main() async {
   //   print('$e\n===\n');
   // });
 
+  // runApp(const LoadingScreen());
+
+  final prefs = await SharedPreferences.getInstance();
+
   runApp(
     ProviderScope(
+      overrides: [
+        sharedPreferencesProvider.overrideWithValue(prefs),
+      ],
       child: MaterialApp(
         title: 'Baseball Tapped Out',
         theme: ThemeData(

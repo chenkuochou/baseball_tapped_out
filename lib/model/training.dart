@@ -1,4 +1,3 @@
-
 import 'package:baseball_tapped_out/model/enum/training_type.dart';
 import 'package:baseball_tapped_out/model/player.dart';
 
@@ -43,8 +42,6 @@ class Training {
         _ => player!
             .copyWith(stamina: player!.stamina + outputLevels[currentLevel]),
       };
-
-  
 
   Training copyWith({
     String? title,
