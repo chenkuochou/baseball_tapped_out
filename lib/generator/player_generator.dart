@@ -45,19 +45,20 @@ List<Player> generatePitchers() {
 
 List<Player> _createPlayers(bool isAHitter, int numberOfPlayers,
     List<PlayerClass> playerClasses, List positions) {
+  final List<int> numbers = _getRandomList(numberOfPlayers);
+
   Player createAPlayer(int index) {
-    final number = _getRandomInt(0, 100);
     final firstName = faker.person.firstName();
     final lastName = faker.person.lastName();
     final avatarUrl =
-        'https://api.dicebear.com/7.x/pixel-art/svg?seed=$lastName}';
+        'https://api.dicebear.com/7.x/pixel-art/svg?seed=$lastName${DateTime.now()}';
 
     final List<int> values =
         _getListRandom(isAHitter ? 6 : 7, playerClasses[index]);
 
     return isAHitter
         ? Player(
-            number: number,
+            number: numbers[index],
             firstName: firstName,
             lastName: lastName,
             avatarUrl: avatarUrl,
@@ -70,7 +71,7 @@ List<Player> _createPlayers(bool isAHitter, int numberOfPlayers,
             potential: values[5],
           )
         : Player(
-            number: number,
+            number: numbers[index],
             firstName: firstName,
             lastName: lastName,
             avatarUrl: avatarUrl,
@@ -92,8 +93,16 @@ List<Player> _createPlayers(bool isAHitter, int numberOfPlayers,
   return players;
 }
 
-int _getRandomInt(int start, int endExclusive) {
-  return Random().nextInt(endExclusive - start) + start;
+List<int> _getRandomList(int items) {
+  final List<int> numbers = [];
+  for (var i = 0; i < items; i++) {
+    int number = _getRandomInt(0, 100);
+    while (numbers.contains(number)) {
+      number = _getRandomInt(0, 100);
+    }
+    numbers.add(number);
+  }
+  return numbers;
 }
 
 List<int> _getListRandom(int items, PlayerClass playerClass) {
@@ -112,6 +121,10 @@ List<int> _getListRandom(int items, PlayerClass playerClass) {
     PlayerClass.epic => getNumbers(60, 90),
     _ => getNumbers(70, 100),
   };
+}
+
+int _getRandomInt(int start, int endExclusive) {
+  return Random().nextInt(endExclusive - start) + start;
 }
 
 List<FieldingPosition> _fielderFielding = [

@@ -17,7 +17,7 @@ class FieldingTab extends ConsumerWidget {
         children: [
           CircleAvatar(
             // radius: 20,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.grey,
             child: SvgPicture.network(player.avatarUrl, height: 30),
           ),
           // const SizedBox(height: 5),

@@ -6,8 +6,6 @@ class RotationTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Center(
-      child: FilledButton(onPressed: () {}, child: const Text('save')),
-    );
+    return const Placeholder();
   }
 }

@@ -5,7 +5,6 @@
 import 'package:baseball_tapped_out/common/my_text.dart';
 import 'package:baseball_tapped_out/common/palette.dart';
 import 'package:baseball_tapped_out/game/game_page.dart';
-import 'package:baseball_tapped_out/provider/app_providers.dart';
 import 'package:baseball_tapped_out/team/team_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'firebase_options.dart';
+final sharedPreferencesProvider =
+    Provider<SharedPreferences>((ref) => throw UnimplementedError());
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,8 @@ Future<void> main() async {
 
   // runApp(const LoadingScreen());
 
-  final prefs = await SharedPreferences.getInstance();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  // prefs.clear();
 
   runApp(
     ProviderScope(
@@ -138,7 +140,9 @@ class _LayoutPageState extends State<LayoutPage> {
                   myText('selectedIndex: $_selectedIndex'),
                   const TeamPage(),
                   const GamePage(),
-                  myText('selectedIndex: $_selectedIndex'),
+                  const Center(
+                    child: Text('Coming soon!'),
+                  ),
                   myText('selectedIndex: $_selectedIndex'),
                   myText('selectedIndex: $_selectedIndex'),
                 ],

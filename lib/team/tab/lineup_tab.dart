@@ -1,6 +1,5 @@
-import 'package:baseball_tapped_out/common/palette.dart';
 import 'package:baseball_tapped_out/model/player.dart';
-import 'package:baseball_tapped_out/provider/lineup_provider.dart';
+import 'package:baseball_tapped_out/provider/player_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,7 +11,7 @@ class LineupTab extends ConsumerStatefulWidget {
 }
 
 class _LineupPageState extends ConsumerState<LineupTab> {
-  late List<Player> lineup = ref.watch(lineupProvider);
+  late List<Player> lineup = ref.watch(hittersProvider);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class _LineupPageState extends ConsumerState<LineupTab> {
                 final Player player = lineup.removeAt(oldIndex);
                 lineup.insert(newIndex, player);
 
-                ref.read(lineupProvider.notifier).changeState(lineup);
+                ref.read(hittersProvider.notifier).updateState(lineup);
               });
             },
             buildDefaultDragHandles: false,

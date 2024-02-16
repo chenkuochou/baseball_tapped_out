@@ -1,4 +1,4 @@
-import 'package:baseball_tapped_out/provider/game_stats_provider.dart';
+import 'package:baseball_tapped_out/provider/game_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
