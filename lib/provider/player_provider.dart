@@ -3,6 +3,8 @@ import 'package:baseball_tapped_out/main.dart';
 import 'package:baseball_tapped_out/model/player.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+
+
 final hittersProvider =
     NotifierProvider<HittersNotifier, List<Player>>(HittersNotifier.new);
 
