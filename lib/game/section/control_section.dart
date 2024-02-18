@@ -48,6 +48,7 @@ class ControlSection extends ConsumerWidget {
 
 Widget controlButton(String text) => Padding(
       padding: const EdgeInsets.all(2),
+      /// TODO: Add onTap ripple effect
       child: InkWell(
         onTap: () {},
         child: Container(
