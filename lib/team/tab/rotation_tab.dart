@@ -20,6 +20,9 @@ class _RotationTabState extends ConsumerState<RotationTab> {
     return Row(
       children: [
         Flexible(
+            flex: 1,
+            child: Text(ref.watch(pitcherClickedProvider)?.firstName ?? ''))
+ ,       Flexible(
           flex: 1,
           child: myReorderableListView(
             players: rotation,
@@ -36,9 +39,6 @@ class _RotationTabState extends ConsumerState<RotationTab> {
             ref: ref,
           ),
         ),
-        Flexible(
-            flex: 1,
-            child: Text(ref.watch(pitcherClickedProvider)?.firstName ?? ''))
       ],
     );
   }

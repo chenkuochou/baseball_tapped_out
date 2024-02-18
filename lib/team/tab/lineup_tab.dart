@@ -20,6 +20,9 @@ class _LineupPageState extends ConsumerState<LineupTab> {
     return Row(
       children: [
         Flexible(
+            flex: 1,
+            child: Text(ref.watch(hitterClickedProvider)?.firstName ?? '')),
+        Flexible(
           flex: 1,
           child: myReorderableListView(
             players: lineup,
@@ -36,9 +39,6 @@ class _LineupPageState extends ConsumerState<LineupTab> {
             ref: ref,
           ),
         ),
-        Flexible(
-            flex: 1,
-            child: Text(ref.watch(hitterClickedProvider)?.firstName ?? ''))
       ],
     );
   }
