@@ -17,29 +17,30 @@ class _LineupPageState extends ConsumerState<LineupTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Flexible(
-            flex: 1,
-            child: Text(ref.watch(hitterClickedProvider)?.firstName ?? '')),
-        Flexible(
-          flex: 1,
-          child: myReorderableListView(
-            players: lineup,
-            isHitter: true,
-            onReorder: (oldIndex, newIndex) => setState(() {
-              if (oldIndex < newIndex) {
-                newIndex -= 1;
-              }
-              final Player player = lineup.removeAt(oldIndex);
-              lineup.insert(newIndex, player);
+    return LayoutBuilder(
+      builder: (context, constraints) => Row(
+        children: [
+          Expanded(
+              child: Text(ref.watch(hitterClickedProvider)?.firstName ?? '')),
+          SizedBox(
+            width: constraints.maxWidth * 0.5,
+            child: myReorderableListView(
+              players: lineup,
+              isHitter: true,
+              onReorder: (oldIndex, newIndex) => setState(() {
+                if (oldIndex < newIndex) {
+                  newIndex -= 1;
+                }
+                final Player player = lineup.removeAt(oldIndex);
+                lineup.insert(newIndex, player);
 
-              ref.read(hittersProvider.notifier).updateState(lineup);
-            }),
-            ref: ref,
+                ref.read(hittersProvider.notifier).updateState(lineup);
+              }),
+              ref: ref,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -1,13 +1,12 @@
 import 'package:baseball_tapped_out/model/game_stats.dart';
 import 'package:baseball_tapped_out/model/player.dart';
+import 'package:baseball_tapped_out/provider/player_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final pitcherClickedProvider = StateProvider<Player?>((_) {
-  print('object');
-  return null;
-});
-
 final hitterClickedProvider = StateProvider<Player?>((_) => null);
+final pitcherClickedProvider = StateProvider<Player?>((_) => null);
+final currentHitterProvider = StateProvider<Player>((ref) => ref.read(hittersProvider).first);
+final currentPitcherProvider = StateProvider<Player?>((ref) => ref.read(pitchersProvider).first);
 
 final gameStatsProvider =
     NotifierProvider<GameStatsNotifier, GameStats>(GameStatsNotifier.new);

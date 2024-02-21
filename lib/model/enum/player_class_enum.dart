@@ -19,10 +19,10 @@ enum PlayerClass {
 }
 
 Color getClassColorByPlayer(PlayerClass player) => switch (player) {
-      PlayerClass.dust => Colors.grey.shade300,
+      PlayerClass.dust => Colors.grey,
       PlayerClass.normal => Colors.blue,
-      PlayerClass.rare => Colors.red,
-      PlayerClass.epic => Colors.purple,
+      PlayerClass.rare => Colors.purple,
+      PlayerClass.epic => Colors.red,
       PlayerClass.legendary => const Color(0xFFFEBE4C),
       PlayerClass.pack => Colors.green,
     };

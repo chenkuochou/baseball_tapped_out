@@ -1,3 +1,4 @@
+import 'package:baseball_tapped_out/model/enum/player_class_enum.dart';
 import 'package:baseball_tapped_out/model/player.dart';
 import 'package:baseball_tapped_out/provider/player_provider.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class FieldingTab extends ConsumerWidget {
         children: [
           CircleAvatar(
             // radius: 20,
-            backgroundColor: Colors.grey,
+            backgroundColor: getClassColorByPlayer(player.playerClass),
             child: SvgPicture.network(player.avatarUrl, height: 30),
           ),
           // const SizedBox(height: 5),

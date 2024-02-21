@@ -8,39 +8,52 @@ class ControlSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LayoutBuilder(
-      builder: (_, constraints) => SizedBox(
-        height: constraints.maxWidth,
-        // padding: const EdgeInsets.all(8),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Flexible(
-              flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                      flex: 1,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(flex: 1, child: controlButton('Wait')),
-                          Flexible(flex: 1, child: controlButton('Bunt')),
-                        ],
-                      )),
-                  Flexible(
-                    flex: 1,
-                    child: controlButton('Power'),
-                  )
-                ],
-              ),
+      builder: (_, constraints) => Column(
+        children: [
+          SizedBox(
+            height: constraints.maxHeight * 0.25,
+          ),
+          SizedBox(
+            height: constraints.maxHeight * 0.75,
+            // padding: const EdgeInsets.all(8),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                          flex: 1,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(flex: 1, child: controlButton('Wait')),
+                              Flexible(flex: 1, child: controlButton('Bunt')),
+                            ],
+                          )),
+                      Flexible(
+                        flex: 1,
+                        child: controlButton('Power'),
+                      )
+                    ],
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(flex: 3, child: controlButton('Swing')),
+                      Flexible(flex: 1, child: controlButton('Contact')),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Flexible(
-              flex: 1,
-              child: controlButton('Swing'),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -48,6 +61,7 @@ class ControlSection extends ConsumerWidget {
 
 Widget controlButton(String text) => Padding(
       padding: const EdgeInsets.all(2),
+
       /// TODO: Add onTap ripple effect
       child: InkWell(
         onTap: () {},

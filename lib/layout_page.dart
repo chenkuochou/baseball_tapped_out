@@ -1,3 +1,4 @@
+import 'package:baseball_tapped_out/bag/bag.dart';
 import 'package:baseball_tapped_out/common/common.dart';
 import 'package:baseball_tapped_out/game/game_page.dart';
 import 'package:baseball_tapped_out/team/team_page.dart';
@@ -12,7 +13,8 @@ class LayoutPage extends StatefulWidget {
 }
 
 class _LayoutPageState extends State<LayoutPage> {
-  int _selectedIndex = 2;
+  int _selectedIndex =
+      ['home', 'team', 'game', 'training', 'bag', 'setting'].indexOf('game');
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +61,7 @@ class _LayoutPageState extends State<LayoutPage> {
                 NavigationRailDestination(
                   icon: const Icon(Icons.military_tech_outlined),
                   selectedIcon: const Icon(Icons.military_tech),
-                  label: myText('Hero'),
+                  label: myText('Cards'),
                 ),
                 NavigationRailDestination(
                   icon: const Icon(Icons.settings_outlined),
@@ -79,7 +81,7 @@ class _LayoutPageState extends State<LayoutPage> {
                   const Center(
                     child: Text('Coming soon!'),
                   ),
-                  myText('selectedIndex: $_selectedIndex'),
+                  const BagPage(),
                   myText('selectedIndex: $_selectedIndex'),
                 ],
               ),
