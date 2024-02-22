@@ -51,7 +51,7 @@ List<Player> _createPlayers(bool isAHitter, int numberOfPlayers,
     final firstName = faker.person.firstName();
     final lastName = faker.person.lastName();
     final avatarUrl =
-        'https://api.dicebear.com/7.x/pixel-art/svg?seed=$lastName${DateTime.now()}';
+        'https://api.dicebear.com/7.x/pixel-art/png?seed=$lastName${DateTime.now()}';
 
     final List<int> values =
         _getListRandom(isAHitter ? 6 : 7, playerClasses[index]);

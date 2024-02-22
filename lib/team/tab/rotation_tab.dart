@@ -35,7 +35,7 @@ class _RotationTabState extends ConsumerState<RotationTab> {
                 final Player player = rotation.removeAt(oldIndex);
                 rotation.insert(newIndex, player);
 
-                ref.read(hittersProvider.notifier).updateState(rotation);
+                ref.read(pitchersProvider.notifier).updateState(rotation);
               }),
               ref: ref,
             ),

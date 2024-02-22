@@ -5,11 +5,12 @@ import 'package:baseball_tapped_out/provider/game_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-ReorderableListView myReorderableListView(
-        {required List<Player> players,
-        required bool isHitter,
-        required Function onReorder,
-        required WidgetRef ref}) =>
+ReorderableListView myReorderableListView({
+  required List<Player> players,
+  required bool isHitter,
+  required Function onReorder,
+  required WidgetRef ref,
+}) =>
     ReorderableListView.builder(
       itemCount: players.length,
       itemBuilder: (BuildContext context, int index) {
@@ -23,7 +24,22 @@ ReorderableListView myReorderableListView(
           dense: true,
           minLeadingWidth: 0,
           // horizontalTitleGap: 0,
-          leading: myText((index + 1).toString(), Palette.white, 15),
+          leading: myText(
+              isHitter
+                  ? (index + 1).toString()
+                  : [
+                      'SP',
+                      'SP',
+                      'SP',
+                      'SP',
+                      'RP',
+                      'RP',
+                      'RP',
+                      'RP',
+                      'CL',
+                    ][index],
+              color: Palette.white,
+              size: 15),
           title: PlayerTile(player: players[index], isHitter: isHitter),
           trailing: ReorderableDragStartListener(
             index: index,
@@ -41,11 +57,11 @@ class PlayerTile extends StatelessWidget {
   final bool isHitter;
 
   final double iconSize = 15;
+  final double itemPadding = 10;
+  final double statsPadding = 3;
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -62,15 +78,17 @@ class PlayerTile extends StatelessWidget {
                       '#${player.number.toString()}',
                     ),
                     const SizedBox(width: 10),
-                    LayoutBuilder(
-                      builder: (_, constraints) => ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: constraints.maxWidth,
+                    Expanded(
+                      child: LayoutBuilder(builder: (_, constraints) => ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: constraints.maxWidth,
+                          ),
+                          child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.centerLeft,
+                              child: myText(
+                                  '${player.firstName} ${player.lastName}')),
                         ),
-                        child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: myText(
-                                '${player.firstName} ${player.lastName}')),
                       ),
                     ),
                   ],
@@ -84,27 +102,43 @@ class PlayerTile extends StatelessWidget {
                         ? Row(
                             children: [
                               Icon(Icons.bolt, size: iconSize),
-                              const SizedBox(width: 5),
+                              SizedBox(width: statsPadding),
                               myText(player.batting.toString(),
-                                  getClassColorByPlayer(player.playerClass)),
-                              const SizedBox(width: 10),
+                                  color: getClassColorByPlayer(
+                                      player.playerClass)),
+                              SizedBox(width: itemPadding),
                               Icon(Icons.remove_red_eye, size: iconSize),
-                              const SizedBox(width: 5),
+                              SizedBox(width: statsPadding),
                               myText(player.eye.toString(),
-                                  getClassColorByPlayer(player.playerClass)),
+                                  color: getClassColorByPlayer(
+                                      player.playerClass)),
+                              SizedBox(width: itemPadding),
+                              Icon(Icons.speed, size: iconSize),
+                              SizedBox(width: statsPadding),
+                              myText(player.running.toString(),
+                                  color: getClassColorByPlayer(
+                                      player.playerClass)),
                             ],
                           )
                         : Row(
                             children: [
                               Icon(Icons.sports_baseball, size: iconSize),
-                              const SizedBox(width: 5),
+                              SizedBox(width: statsPadding),
                               myText(player.pitching.toString(),
-                                  getClassColorByPlayer(player.playerClass)),
-                              const SizedBox(width: 10),
+                                  color: getClassColorByPlayer(
+                                      player.playerClass)),
+                              SizedBox(width: itemPadding),
                               Icon(Icons.mode_standby, size: iconSize),
-                              const SizedBox(width: 5),
+                              SizedBox(width: statsPadding),
                               myText(player.control.toString(),
-                                  getClassColorByPlayer(player.playerClass)),
+                                  color: getClassColorByPlayer(
+                                      player.playerClass)),
+                              SizedBox(width: itemPadding),
+                              Icon(Icons.thermostat, size: iconSize),
+                              SizedBox(width: statsPadding),
+                              myText(player.stability.toString(),
+                                  color: getClassColorByPlayer(
+                                      player.playerClass)),
                             ],
                           ),
                   ],
@@ -114,7 +148,9 @@ class PlayerTile extends StatelessWidget {
           ),
         ),
         myText(player.ability.round().toString(),
-            getClassColorByPlayer(player.playerClass), 15, FontWeight.bold)
+            color: getClassColorByPlayer(player.playerClass),
+            size: 15,
+            weight: FontWeight.bold)
       ],
     );
   }
