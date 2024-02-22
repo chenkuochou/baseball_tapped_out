@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:baseball_tapped_out/common/common.dart';
-import 'package:baseball_tapped_out/common/my_cached_img.dart';
 import 'package:baseball_tapped_out/common/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,9 +22,7 @@ class FieldSection extends ConsumerWidget {
                 DiamondView(),
               ],
             )),
-        Center(
-          child: myCachedImg('https://api.dicebear.com/7.x/pixel-art/png',height: 20),
-        ),
+        const Center(),
       ],
     );
   }

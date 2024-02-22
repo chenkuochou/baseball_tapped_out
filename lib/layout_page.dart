@@ -14,7 +14,7 @@ class LayoutPage extends StatefulWidget {
 
 class _LayoutPageState extends State<LayoutPage> {
   int _selectedIndex =
-      ['home', 'team', 'game', 'training', 'bag', 'setting'].indexOf('game');
+      ['home', 'team', 'game', 'training', 'bag', 'setting'].indexOf('team');
 
   @override
   Widget build(BuildContext context) {
