@@ -54,7 +54,7 @@ List<Player> _createPlayers(bool isAHitter, int numberOfPlayers,
         'https://api.dicebear.com/7.x/pixel-art/png?seed=$lastName${DateTime.now()}';
 
     final List<int> values =
-        _getListRandom( 7, playerClasses[index]);
+        _getListRandom(isAHitter ? 6 : 7, playerClasses[index]);
 
     return isAHitter
         ? Player(

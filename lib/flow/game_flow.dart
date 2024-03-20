@@ -1,22 +1,27 @@
-// ignore_for_file: unused_element, unused_local_variable
-
 import 'dart:math';
 
 import 'package:baseball_tapped_out/provider/game_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+double _number = Random().nextDouble();
 // Check status
 
 final gameFlowProvider = Provider((ref) {
-  int pControl = ref.watch(currentPitcherProvider).control!;
-  int hSwing = ref.watch(currentHitterProvider).eye!;
-  int hContact = ref.watch(currentHitterProvider).control!;
+  bool isPitchingStrike =
+      _isPitchingStrike(ref.watch(currentPitcherProvider)!.control!);
 
+  if (isPitchingStrike) {
+    // Strike
+  } else {
+    // Ball
+  }
+  return;
 });
 
-bool _pStrike(int value) => (_checkIfTrue(value));
-bool _hSwing(int value) => _checkIfTrue(value);
-bool _hContact(int value) => _checkIfTrue(value);
+bool _isPitchingStrike(int value) {
+  return _number < value / 100;
+}
+
 
 // Hitter hit
 
@@ -27,6 +32,3 @@ bool _hContact(int value) => _checkIfTrue(value);
 // Player update
 
 // Inning update
-
-/// help funcs
-bool _checkIfTrue(int value) => Random().nextDouble() < value / 100;

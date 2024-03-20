@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final hitterClickedProvider = StateProvider<Player?>((_) => null);
 final pitcherClickedProvider = StateProvider<Player?>((_) => null);
 final currentHitterProvider = StateProvider<Player>((ref) => ref.read(hittersProvider).first);
-final currentPitcherProvider = StateProvider<Player>((ref) => ref.read(pitchersProvider).first);
+final currentPitcherProvider = StateProvider<Player?>((ref) => ref.read(pitchersProvider).first);
 
 final gameStatsProvider =
     NotifierProvider<GameStatsNotifier, GameStats>(GameStatsNotifier.new);

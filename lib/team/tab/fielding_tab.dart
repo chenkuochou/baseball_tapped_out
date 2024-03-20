@@ -20,7 +20,7 @@ class FieldingTab extends ConsumerWidget {
           CircleAvatar(
             // radius: 20,
             backgroundColor: getClassColorByPlayer(player.playerClass),
-            child: myCachedImg(player.avatarUrl, height: 30, width: 30),
+            child: myCachedImg(player.avatarUrl, height: 30),
           ),
           // const SizedBox(height: 5),
           Container(

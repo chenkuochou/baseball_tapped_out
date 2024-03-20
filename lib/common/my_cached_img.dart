@@ -7,8 +7,5 @@ CachedNetworkImage myCachedImg(String url, {double? height, double? width}) =>
       height: height,
       width: width,
       placeholder: (context, url) => const CircularProgressIndicator(),
-      errorWidget: (context, url, error) {
-        debugPrint(error.toString());
-        return const Icon(Icons.error);
-      },
+      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
